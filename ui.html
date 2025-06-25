@@ -11,7 +11,7 @@
       margin: 0;
       padding: 16px;
       background: #ffffff;
-      font-size: 12px;
+      font-size: 14px;
       line-height: 1.4;
     }
 
@@ -23,7 +23,7 @@
     }
 
     .title {
-      font-size: 14px;
+      font-size: 32px;
       font-weight: 600;
       color: #000;
       margin-bottom: 8px;
@@ -32,7 +32,7 @@
     .description {
       color: #666;
       margin-bottom: 16px;
-      font-size: 11px;
+      font-size: 14px;
       line-height: 1.5;
     }
 
@@ -43,6 +43,7 @@
     }
 
     .option-label {
+      font-size: 16px;
       font-weight: 500;
       color: #333;
       margin-bottom: 4px;
@@ -58,7 +59,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 16px;
+      padding: 24px 12px 12px;
       border: 2px solid #ccc;
       border-radius: 8px;
       cursor: pointer;
@@ -70,15 +71,22 @@
       border-color: #0066ff;
     }
 
-    .radio-card img {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 8px;
-    }
-
     .radio-card .material-symbols-rounded {
       font-size: 48px;
       margin-bottom: 8px;
+    }
+
+    .radio-card label {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .radio-card .description {
+      font-size: 12px;
+      color: #888;
+      text-align: center;
     }
 
     .button-group {
@@ -91,7 +99,7 @@
       right: 0;
       background: white;
       padding: 8px;
-      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      border-top: 1px solid #ddd;
     }
 
     .button {
@@ -101,7 +109,7 @@
       border-radius: 6px;
       background: #fff;
       color: #333;
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -135,11 +143,18 @@
       font-weight: 600;
       color: #333;
       margin-bottom: 6px;
-      font-size: 11px;
+      font-size: 14px;
+    }
+
+    .settings-info-list {
+      list-style-type: disc;
+      margin: 0;
+      padding: 0;
+      padding-left: 20px;
     }
 
     .settings-info .info-item {
-      font-size: 10px;
+      font-size: 12px;
       color: #666;
       margin: 2px 0;
     }
@@ -159,22 +174,26 @@
       <div class="radio-group">
         <div class="radio-card" id="horizontal-card" onclick="selectCard('horizontal')">
           <span class="material-symbols-rounded">east</span>
-          <label for="horizontal">Horizontal First (Left → Right, then Top → Bottom)</label>
+          <label for="horizontal">Horizontal</label>
+          <span class="description">Left → Right, <br />then Top → Bottom</span>
         </div>
         <div class="radio-card" id="vertical-card" onclick="selectCard('vertical')">
           <span class="material-symbols-rounded">south</span>
-          <label for="vertical">Vertical First (Top → Bottom, then Left → Right)</label>
+          <label for="vertical">Vertical</label>
+          <span class="description">Top → Bottom, <br />then Left → Right</span>
         </div>
       </div>
     </div>
 
     <div class="settings-info">
       <div class="info-title">Animation Settings</div>
-      <div class="info-item">• Trigger: Key/Gamepad (→)</div>
-      <div class="info-item">• Action: Navigate to</div>
-      <div class="info-item">• Animation: Smart Animate</div>
-      <div class="info-item">• Curve: Ease In and Out</div>
-      <div class="info-item">• Duration: 300ms</div>
+      <ul class="settings-info-list">
+        <li class="info-item">Trigger: Key/Gamepad (→)</li>
+        <li class="info-item">Action: Navigate to</li>
+        <li class="info-item">Animation: Smart Animate</li>
+        <li class="info-item">Curve: Ease In and Out</li>
+        <li class="info-item">Duration: 300ms</li>
+      </ul>
     </div>
 
     <div class="button-group">

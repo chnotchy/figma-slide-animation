@@ -5,18 +5,12 @@ A Figma plugin that creates continuous animation transitions between selected fr
 ## Features
 
 - Creates one continuous animation transition between selected frames
-- Generates an acyclic connected path (graph theory)
-- Overwrites existing transitions between frames
+  - Overwrites existing transitions between frames
 - Ignores non-frame objects (Groups, etc.)
-- Dark mode and light mode support with CSS variables
-- Improved UI with selectable cards for direction priority
+- Supports both vertical-first and horizontal-first transition priorities
+- Dark mode and light mode support
 
-## Transition Direction & Priority
-
-- **Default**: Top-left to bottom-right
-- **Grid Layout**: Choose between vertical-first or horizontal-first priority
-
-## Animation Settings
+### Animation Settings
 
 - **Trigger**: Next Page (→, ↓, Enter), Previous Page (←, ↑)
 - **Action**: Navigate to
@@ -24,7 +18,26 @@ A Figma plugin that creates continuous animation transitions between selected fr
 - **Curve**: Ease In and Out
 - **Duration**: 300ms
 
-## Development Setup
+
+## Usage in Figma
+
+1. Select 2 or more frames in Figma
+2. Select direction priority (Vertical or Horizontal)
+3. Click "Create Animation" button
+
+
+## For Developers
+
+### File Structure
+
+- `code.ts` - Main logic (TypeScript)
+- `code.js` - Compiled JavaScript (auto-generated)
+- `manifest.json` - Plugin configuration file
+- `package.json` - Dependencies configuration
+- `tsconfig.json` - TypeScript configuration
+- `ui.html` - Plugin user interface
+
+### Development Setup
 
 1. Install dependencies:
 ```bash
@@ -40,19 +53,3 @@ Or for development with auto-compilation:
 ```bash
 npm run watch
 ```
-
-## Usage in Figma
-
-1. Select 2 or more frames in Figma
-2. Choose "Create Slide Animation" from the plugin menu
-3. Select direction priority (Horizontal First or Vertical First)
-4. Click "Create Animation" button
-
-## File Structure
-
-- `manifest.json` - Plugin configuration file
-- `code.ts` - Main logic (TypeScript)
-- `code.js` - Compiled JavaScript (auto-generated)
-- `ui.html` - Plugin user interface
-- `package.json` - Dependencies configuration
-- `tsconfig.json` - TypeScript configuration

@@ -27,6 +27,7 @@ figma.showUI(__html__, { width: 320, height: 400 });
 
 figma.ui.on('message', (msg) => {
   if (msg.type === 'create-animation') {
+    clearAllTransitions(); // Clear all transitions before creating new ones
     createSlideAnimation(msg.direction);
   } else if (msg.type === 'cancel') {
     figma.closePlugin();
@@ -197,6 +198,13 @@ function createTransitions(frames: FrameNode[]) {
 
     currentFrame.reactions = [...(currentFrame.reactions || []), ...reverseReactions];
   }
+}
+
+function clearAllTransitions() {
+  const frames = figma.currentPage.findAll(node => node.type === 'FRAME') as FrameNode[];
+  frames.forEach(frame => {
+    frame.reactions = []; // Clear all existing reactions
+  });
 }
 
 // Handle plugin commands

@@ -6,13 +6,46 @@
   <title>Figma Slide Animation</title>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
   <style>
+    :root {
+      --md-sys-color-surface: rgb(247 249 255);
+      --md-sys-color-on-surface: rgb(24 28 32);
+      --md-sys-color-surface-variant: rgb(222 227 235);
+      --md-sys-color-on-surface-variant: rgb(66 71 78);
+      --md-sys-color-primary: rgb(45 98 140);
+      --md-sys-color-on-primary: rgb(205 229 255);
+      --md-sys-color-secondary: rgb(81 96 111);
+      --md-sys-color-on-secondary: rgb(255 255 255);
+      --md-sys-color-outline: rgb(114 120 127);
+      --md-sys-color-outline-variant: rgb(194 199 207);
+      --md-sys-color-surface-container-low: rgb(241 244 249);
+      --md-sys-color-surface-container: rgb(236 238 243);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --md-sys-color-surface: rgb(16 20 24);
+        --md-sys-color-on-surface: rgb(224 226 232);
+        --md-sys-color-surface-variant: rgb(66 71 78);
+        --md-sys-color-on-surface-variant: rgb(194 199 207);
+        --md-sys-color-primary: rgb(154 203 250);
+        --md-sys-color-on-primary: rgb(0 51 82);
+        --md-sys-color-secondary: rgb(185 200 218);
+        --md-sys-color-on-secondary: rgb(35 50 64);
+        --md-sys-color-outline: rgb(140 145 152);
+        --md-sys-color-outline-variant: rgb(66 71 78);
+        --md-sys-color-surface-container-low: rgb(24 28 32);
+        --md-sys-color-surface-container: rgb(28 32 36);
+      }
+    }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       margin: 0;
       padding: 16px;
-      background: #ffffff;
       font-size: 14px;
       line-height: 1.4;
+      background: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
     }
 
     .container {
@@ -25,12 +58,12 @@
     .title {
       font-size: 32px;
       font-weight: 600;
-      color: #000;
+      color: var(--md-sys-color-on-surface);
       margin-bottom: 8px;
     }
 
     .description {
-      color: #666;
+      color: var(--md-sys-color-outline);
       margin-bottom: 16px;
       font-size: 14px;
       line-height: 1.5;
@@ -45,7 +78,7 @@
     .option-label {
       font-size: 16px;
       font-weight: 500;
-      color: #333;
+      color: var(--md-sys-color-on-surface);
       margin-bottom: 4px;
     }
 
@@ -60,7 +93,7 @@
       flex-direction: column;
       align-items: center;
       padding: 24px 12px 12px;
-      border: 2px solid #ccc;
+      border: 2px solid var(--md-sys-color-outline-variant);
       border-radius: 8px;
       cursor: pointer;
       transition: border-color 0.2s ease;
@@ -68,24 +101,34 @@
     }
 
     .radio-card.selected {
-      border-color: #0066ff;
+      border-color: var(--md-sys-color-primary);
+      background: var(--md-sys-color-on-primary);
+    }
+
+    .radio-card:not(.selected):hover {
+      background: var(--md-sys-color-surface-container-low);
     }
 
     .radio-card .material-symbols-rounded {
       font-size: 48px;
       margin-bottom: 8px;
+      color: var(--md-sys-color-outline);
+    }
+
+    .radio-card.selected .material-symbols-rounded {
+      color: var(--md-sys-color-primary);
     }
 
     .radio-card label {
       font-size: 18px;
       font-weight: 700;
-      color: #333;
+      color: var(--md-sys-color-on-surface);
       margin-bottom: 12px;
     }
 
     .radio-card .description {
       font-size: 12px;
-      color: #888;
+      color: var(--md-sys-color-outline);
       text-align: center;
     }
 
@@ -97,18 +140,17 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: white;
       padding: 8px;
-      border-top: 1px solid #ddd;
+      border-top: 1px solid var(--md-sys-color-outline-variant);
     }
 
     .button {
       flex: 1;
       padding: 8px 12px;
-      border: 1px solid #ddd;
+      border: 1px solid var(--md-sys-color-outline);
       border-radius: 6px;
-      background: #fff;
-      color: #333;
+      background: var(--md-sys-color-surface-variant);
+      color: var(--md-sys-color-on-surface);
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
@@ -116,24 +158,23 @@
     }
 
     .button:hover {
-      background: #f8f8f8;
-      border-color: #ccc;
+      border-color: var(--md-sys-color-outline-variant);
+      background: var(--md-sys-color-secondary);
+      color: var(--md-sys-color-on-secondary);
     }
 
     .button.primary {
-      background: #0066ff;
-      color: white;
-      border-color: #0066ff;
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
     }
 
     .button.primary:hover {
-      background: #0052cc;
-      border-color: #0052cc;
+      background: var(--md-sys-color-primary);
+      border-color: var(--md-sys-color-primary);
     }
 
     .settings-info {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
+      background: var(--md-sys-color-surface-container);
       border-radius: 6px;
       padding: 12px;
       margin-top: 8px;
@@ -141,7 +182,7 @@
 
     .settings-info .info-title {
       font-weight: 600;
-      color: #333;
+      color: var(--md-sys-color-on-surface);
       margin-bottom: 6px;
       font-size: 14px;
     }
@@ -155,7 +196,7 @@
 
     .settings-info .info-item {
       font-size: 12px;
-      color: #666;
+      color: var(--md-sys-color-on-surface-variant);
       margin: 2px 0;
     }
   </style>

@@ -145,16 +145,19 @@
     }
 
     .button {
-      flex: 1;
-      padding: 8px 12px;
+      padding: 8px 20px 8px 12px;
       border: 1px solid var(--md-sys-color-outline);
-      border-radius: 6px;
+      border-radius: 999px;
       background: var(--md-sys-color-surface);
       color: var(--md-sys-color-on-surface);
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .button:hover {
@@ -162,9 +165,11 @@
     }
 
     .button.primary {
+      flex: 1;
       border: none;
       background: var(--md-sys-color-primary);
       color: var(--md-sys-color-on-primary);
+      font-weight: 600;
     }
 
     .button.primary:hover {
@@ -237,8 +242,14 @@
     </div>
 
     <div class="button-group">
-      <button class="button" id="cancel">Cancel</button>
-      <button class="button primary" id="create">Create Animation</button>
+      <button class="button" id="cancel">
+        <span class="material-symbols-rounded">close</span>
+        Cancel
+      </button>
+      <button class="button primary" id="create">
+        <span class="material-symbols-rounded">rocket_launch</span>
+        Create Animation
+      </button>
     </div>
   </div>
 

@@ -59,7 +59,6 @@
       font-size: 32px;
       font-weight: 600;
       color: var(--md-sys-color-on-surface);
-      margin-bottom: 8px;
     }
 
     .description {
@@ -84,25 +83,29 @@
 
     .radio-group {
       display: flex;
-      gap: 16px;
+      gap: 8px;
     }
 
     .radio-card {
+      transition: all 0.3s ease;
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 3px;
       padding: 24px 12px 12px;
       border: 2px solid var(--md-sys-color-outline-variant);
-      border-radius: 8px;
+      outline: 0px solid transparent;
+      border-radius: 12px;
       cursor: pointer;
-      transition: border-color 0.2s ease;
       text-align: center;
     }
 
     .radio-card.selected {
       border-color: var(--md-sys-color-primary);
       background: var(--md-sys-color-on-primary);
+      border: 2px solid transparent;
+      outline: 3px solid var(--md-sys-color-primary);
     }
 
     .radio-card:not(.selected):hover {
@@ -145,6 +148,7 @@
     }
 
     .button {
+      transition: all 0.3s ease;
       padding: 8px 20px 8px 12px;
       border: 1px solid var(--md-sys-color-outline);
       border-radius: 999px;
@@ -153,7 +157,6 @@
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.15s ease;
       display: flex;
       align-items: center;
       justify-content: center;

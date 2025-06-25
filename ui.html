@@ -172,15 +172,15 @@
     <div class="option-group">
       <div class="option-label">Direction Priority</div>
       <div class="radio-group">
+        <div class="radio-card selected" id="vertical-card" data-direction="vertical" onclick="selectCard(this)">
+          <span class="material-symbols-rounded">south</span>
+          <label>Vertical</label>
+          <span class="description">Top → Bottom, <br />then Left → Right</span>
+        </div>
         <div class="radio-card" id="horizontal-card" data-direction="horizontal" onclick="selectCard(this)">
           <span class="material-symbols-rounded">east</span>
           <label>Horizontal</label>
           <span class="description">Left → Right, <br />then Top → Bottom</span>
-        </div>
-        <div class="radio-card" id="vertical-card" data-direction="vertical" onclick="selectCard(this)">
-          <span class="material-symbols-rounded">south</span>
-          <label>Vertical</label>
-          <span class="description">Top → Bottom, <br />then Left → Right</span>
         </div>
       </div>
     </div>

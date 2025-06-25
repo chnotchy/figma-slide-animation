@@ -8,6 +8,8 @@ A Figma plugin that creates continuous animation transitions between selected fr
 - Generates an acyclic connected path (graph theory)
 - Overwrites existing transitions between frames
 - Ignores non-frame objects (Groups, etc.)
+- Dark mode and light mode support with CSS variables
+- Improved UI with selectable cards for direction priority
 
 ## Transition Direction & Priority
 
@@ -16,9 +18,8 @@ A Figma plugin that creates continuous animation transitions between selected fr
 
 ## Animation Settings
 
-- **Trigger**: Key/Gamepad (→)
+- **Trigger**: Next Page (→, ↓, Enter), Previous Page (←, ↑)
 - **Action**: Navigate to
-- **Destination**: Next slide
 - **Animation**: Smart Animate
 - **Curve**: Ease In and Out
 - **Duration**: 300ms
@@ -54,4 +55,4 @@ npm run watch
 - `code.js` - Compiled JavaScript (auto-generated)
 - `ui.html` - Plugin user interface
 - `package.json` - Dependencies configuration
-- `tsconfig.json` - TypeScript configuration 
+- `tsconfig.json` - TypeScript configuration

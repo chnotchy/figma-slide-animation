@@ -86,35 +86,73 @@ function createTransitions(frames: FrameNode[]) {
   for (let i = 0; i < frames.length - 1; i++) {
     const currentFrame = frames[i];
     const nextFrame = frames[i + 1];
-    
+
     // Clear existing reactions to avoid conflicts
     currentFrame.reactions = [];
-    
-    // Create new reaction
-    const reaction: Reaction = {
-      actions: [{
-        type: 'NODE',
-        destinationId: nextFrame.id,
-        navigation: 'NAVIGATE',
-        transition: {
-          type: 'SMART_ANIMATE',
-          easing: { type: 'EASE_IN_AND_OUT' },
-          duration: defaultSettings.duration
-        },
-        preserveScrollPosition: false
-      }],
-      trigger: {
-        type: 'ON_KEY_DOWN',
-        device: 'KEYBOARD',
-        keyCodes: [39] // Right arrow key code
+
+    // Create new reactions for multiple keys
+    const reactions: Reaction[] = [
+      {
+        actions: [{
+          type: 'NODE',
+          destinationId: nextFrame.id,
+          navigation: 'NAVIGATE',
+          transition: {
+            type: 'SMART_ANIMATE',
+            easing: { type: 'EASE_IN_AND_OUT' },
+            duration: defaultSettings.duration
+          },
+          preserveScrollPosition: false
+        }],
+        trigger: {
+          type: 'ON_KEY_DOWN',
+          device: 'KEYBOARD',
+          keyCodes: [39] // Right arrow key code
+        }
+      },
+      {
+        actions: [{
+          type: 'NODE',
+          destinationId: nextFrame.id,
+          navigation: 'NAVIGATE',
+          transition: {
+            type: 'SMART_ANIMATE',
+            easing: { type: 'EASE_IN_AND_OUT' },
+            duration: defaultSettings.duration
+          },
+          preserveScrollPosition: false
+        }],
+        trigger: {
+          type: 'ON_KEY_DOWN',
+          device: 'KEYBOARD',
+          keyCodes: [40] // Down arrow key code
+        }
+      },
+      {
+        actions: [{
+          type: 'NODE',
+          destinationId: nextFrame.id,
+          navigation: 'NAVIGATE',
+          transition: {
+            type: 'SMART_ANIMATE',
+            easing: { type: 'EASE_IN_AND_OUT' },
+            duration: defaultSettings.duration
+          },
+          preserveScrollPosition: false
+        }],
+        trigger: {
+          type: 'ON_KEY_DOWN',
+          device: 'KEYBOARD',
+          keyCodes: [13] // Enter key code
+        }
       }
-    };
-    
-    currentFrame.reactions = [reaction];
+    ];
+
+    currentFrame.reactions = reactions;
   }
 }
 
 // Handle plugin commands
 figma.on('run', () => {
   // Plugin UI will handle the interaction
-}); 
+});

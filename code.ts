@@ -150,6 +150,53 @@ function createTransitions(frames: FrameNode[]) {
 
     currentFrame.reactions = reactions;
   }
+
+  for (let i = frames.length - 1; i > 0; i--) {
+    const currentFrame = frames[i];
+    const previousFrame = frames[i - 1];
+
+    // Add reactions for reverse navigation
+    const reverseReactions: Reaction[] = [
+      {
+        actions: [{
+          type: 'NODE',
+          destinationId: previousFrame.id,
+          navigation: 'NAVIGATE',
+          transition: {
+            type: 'SMART_ANIMATE',
+            easing: { type: 'EASE_IN_AND_OUT' },
+            duration: defaultSettings.duration
+          },
+          preserveScrollPosition: false
+        }],
+        trigger: {
+          type: 'ON_KEY_DOWN',
+          device: 'KEYBOARD',
+          keyCodes: [37] // Left arrow key code
+        }
+      },
+      {
+        actions: [{
+          type: 'NODE',
+          destinationId: previousFrame.id,
+          navigation: 'NAVIGATE',
+          transition: {
+            type: 'SMART_ANIMATE',
+            easing: { type: 'EASE_IN_AND_OUT' },
+            duration: defaultSettings.duration
+          },
+          preserveScrollPosition: false
+        }],
+        trigger: {
+          type: 'ON_KEY_DOWN',
+          device: 'KEYBOARD',
+          keyCodes: [38] // Up arrow key code
+        }
+      }
+    ];
+
+    currentFrame.reactions = [...(currentFrame.reactions || []), ...reverseReactions];
+  }
 }
 
 // Handle plugin commands

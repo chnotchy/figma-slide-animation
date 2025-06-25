@@ -59,7 +59,6 @@ function createSlideAnimation(direction: 'horizontal' | 'vertical') {
   createTransitions(sortedFrames);
   
   figma.notify(`Created slide animation for ${sortedFrames.length} frames!`);
-  figma.closePlugin();
 }
 
 function sortFramesByDirection(framePositions: FramePosition[], direction: 'horizontal' | 'vertical'): FrameNode[] {

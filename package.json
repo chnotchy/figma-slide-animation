@@ -1,0 +1,16 @@
+{
+  "name": "figma-slide-animation",
+  "version": "1.0.0",
+  "description": "Create continuous slide animations between selected frames in Figma",
+  "main": "code.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.75.0",
+    "typescript": "^5.0.0"
+  }
+}

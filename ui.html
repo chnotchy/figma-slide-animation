@@ -49,33 +49,30 @@
 
     .radio-group {
       display: flex;
-      flex-direction: column;
-      gap: 6px;
+      gap: 16px;
     }
 
-    .radio-option {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      padding: 4px 0;
-    }
-
-    .radio-option:hover {
-      background: #f5f5f5;
-      border-radius: 4px;
-      margin: 0 -4px;
-      padding: 4px;
-    }
-
-    input[type="radio"] {
-      margin: 0;
-    }
-
-    .radio-option label {
-      cursor: pointer;
+    .radio-card {
       flex: 1;
-      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      text-align: center;
+    }
+
+    .radio-card.selected {
+      border-color: #0066ff;
+    }
+
+    .radio-card img {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 8px;
     }
 
     .button-group {
@@ -154,12 +151,12 @@
     <div class="option-group">
       <div class="option-label">Direction Priority</div>
       <div class="radio-group">
-        <div class="radio-option">
-          <input type="radio" id="horizontal" name="direction" value="horizontal" checked>
+        <div class="radio-card selected" id="horizontal-card" onclick="selectCard('horizontal')">
+          <img src="./assets/horizontal.png" alt="Horizontal Icon">
           <label for="horizontal">Horizontal First (Left → Right, then Top → Bottom)</label>
         </div>
-        <div class="radio-option">
-          <input type="radio" id="vertical" name="direction" value="vertical">
+        <div class="radio-card" id="vertical-card" onclick="selectCard('vertical')">
+          <img src="./assets/vertical.png" alt="Vertical Icon">
           <label for="vertical">Vertical First (Top → Bottom, then Left → Right)</label>
         </div>
       </div>
@@ -181,6 +178,13 @@
   </div>
 
   <script>
+    function selectCard(direction) {
+      document.getElementById('horizontal-card').classList.remove('selected');
+      document.getElementById('vertical-card').classList.remove('selected');
+      document.getElementById(`${direction}-card`).classList.add('selected');
+      document.querySelector(`input#${direction}`).checked = true;
+    }
+
     document.getElementById('create').addEventListener('click', () => {
       const selectedDirection = document.querySelector('input[name="direction"]:checked').value;
       parent.postMessage({

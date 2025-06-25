@@ -1,10 +1,14 @@
 {
   "name": "Figma Slide Animation",
-  "id": "figma-slide-animation",
+  "id": "1519732524647667308",
   "api": "1.0.0",
   "main": "code.js",
   "capabilities": [],
   "enableProposedApi": false,
+  "documentAccess": "dynamic-page",
   "editorType": ["figma"],
-  "ui": "ui.html"
+  "ui": "ui.html",
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  }
 }

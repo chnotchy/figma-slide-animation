@@ -9,6 +9,6 @@
   "editorType": ["figma"],
   "ui": "ui.html",
   "networkAccess": {
-    "allowedDomains": ["none"]
+    "allowedDomains": ["https://fonts.googleapis.com"]
   }
 }

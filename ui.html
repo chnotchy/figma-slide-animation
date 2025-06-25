@@ -172,14 +172,14 @@
     <div class="option-group">
       <div class="option-label">Direction Priority</div>
       <div class="radio-group">
-        <div class="radio-card" id="horizontal-card" onclick="selectCard('horizontal')">
+        <div class="radio-card" id="horizontal-card" data-direction="horizontal" onclick="selectCard(this)">
           <span class="material-symbols-rounded">east</span>
-          <label for="horizontal">Horizontal</label>
+          <label>Horizontal</label>
           <span class="description">Left → Right, <br />then Top → Bottom</span>
         </div>
-        <div class="radio-card" id="vertical-card" onclick="selectCard('vertical')">
+        <div class="radio-card" id="vertical-card" data-direction="vertical" onclick="selectCard(this)">
           <span class="material-symbols-rounded">south</span>
-          <label for="vertical">Vertical</label>
+          <label>Vertical</label>
           <span class="description">Top → Bottom, <br />then Left → Right</span>
         </div>
       </div>
@@ -200,21 +200,23 @@
       <button class="button" id="cancel">Cancel</button>
       <button class="button primary" id="create">Create Animation</button>
     </div>
-
-    <input type="radio" id="horizontal" name="direction" value="horizontal" style="display: none;">
-    <input type="radio" id="vertical" name="direction" value="vertical" style="display: none;">
   </div>
 
   <script>
-    function selectCard(direction) {
-      document.getElementById('horizontal-card').classList.remove('selected');
-      document.getElementById('vertical-card').classList.remove('selected');
-      document.getElementById(`${direction}-card`).classList.add('selected');
-      document.querySelector(`input#${direction}`).checked = true;
+    function selectCard(card) {
+      document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      const selectedDirection = card.getAttribute('data-direction');
+      parent.postMessage({
+        pluginMessage: {
+          type: 'update-direction',
+          direction: selectedDirection
+        }
+      }, '*');
     }
 
     document.getElementById('create').addEventListener('click', () => {
-      const selectedDirection = document.querySelector('input[name="direction"]:checked').value;
+      const selectedDirection = document.querySelector('.radio-card.selected').getAttribute('data-direction');
       parent.postMessage({
         pluginMessage: {
           type: 'create-animation',

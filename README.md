@@ -2,6 +2,8 @@
 
 A Figma plugin that creates continuous animation transitions between selected frames.
 
+![Figma Slide Animation Plugin](./assets/thumbnail.png)
+
 ## Features
 
 - Creates one continuous animation transition between selected frames

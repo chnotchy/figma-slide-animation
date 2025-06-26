@@ -25,16 +25,16 @@ const defaultSettings: AnimationSettings = {
 // Show UI when plugin starts
 figma.showUI(__html__, { width: 400, height: 648 });
 
-figma.ui.on('message', (msg) => {
+figma.ui.on('message', async (msg) => {
   if (msg.type === 'create-animation') {
-    clearAllTransitions(); // Clear all transitions before creating new ones
-    createSlideAnimation(msg.direction);
+    await clearAllTransitions(); // Clear all transitions before creating new ones
+    await createSlideAnimation(msg.direction);
   } else if (msg.type === 'cancel') {
     figma.closePlugin();
   }
 });
 
-function createSlideAnimation(direction: 'horizontal' | 'vertical') {
+async function createSlideAnimation(direction: 'horizontal' | 'vertical') {
   const selection = figma.currentPage.selection;
   
   // Filter only frame nodes
@@ -56,7 +56,7 @@ function createSlideAnimation(direction: 'horizontal' | 'vertical') {
   const sortedFrames = sortFramesByDirection(framePositions, direction);
   
   // Create transitions between consecutive frames
-  createTransitions(sortedFrames);
+  await createTransitions(sortedFrames);
   
   figma.notify(`Created slide animation for ${sortedFrames.length} frames!`);
 }
@@ -82,13 +82,13 @@ function sortFramesByDirection(framePositions: FramePosition[], direction: 'hori
   return sorted.map(fp => fp.frame);
 }
 
-function createTransitions(frames: FrameNode[]) {
+async function createTransitions(frames: FrameNode[]) {
   for (let i = 0; i < frames.length - 1; i++) {
     const currentFrame = frames[i];
     const nextFrame = frames[i + 1];
 
     // Clear existing reactions to avoid conflicts
-    currentFrame.reactions = [];
+    await currentFrame.setReactionsAsync([]);
 
     // Create new reactions for multiple keys
     const reactions: Reaction[] = [
@@ -148,7 +148,7 @@ function createTransitions(frames: FrameNode[]) {
       }
     ];
 
-    currentFrame.reactions = reactions;
+    await currentFrame.setReactionsAsync(reactions);
   }
 
   for (let i = frames.length - 1; i > 0; i--) {
@@ -195,14 +195,14 @@ function createTransitions(frames: FrameNode[]) {
       }
     ];
 
-    currentFrame.reactions = [...(currentFrame.reactions || []), ...reverseReactions];
+    currentFrame.setReactionsAsync([...(currentFrame.reactions || []), ...reverseReactions]);
   }
 }
 
-function clearAllTransitions() {
+async function clearAllTransitions() {
   const frames = figma.currentPage.findAll(node => node.type === 'FRAME') as FrameNode[];
-  frames.forEach(frame => {
-    frame.reactions = []; // Clear all existing reactions
+  frames.forEach(async frame => {
+    await frame.setReactionsAsync([]); // Clear all existing reactions
   });
 }
 

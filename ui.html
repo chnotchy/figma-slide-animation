@@ -40,11 +40,11 @@
 
     @keyframes spin {
       from {
-        transform: rotate(0deg);
+        transform: rotate(30deg);
       }
 
       to {
-        transform: rotate(360deg);
+        transform: rotate(750deg);
       }
     }
 
@@ -321,7 +321,7 @@
 
       if (loading) {
         iconSpan.textContent = 'autorenew';
-        iconSpan.style.animation = 'spin 1s linear infinite';
+        iconSpan.style.animation = 'spin 3s ease-in-out infinite';
         textNode.nodeValue = ' Creating...';
       } else {
         iconSpan.textContent = 'rocket_launch';

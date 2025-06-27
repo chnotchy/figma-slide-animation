@@ -316,17 +316,24 @@
     };
 
     function setCreateButtonLoading(loading) {
-      const iconSpan = document.querySelector('#create .material-symbols-rounded');
-      const textNode = document.querySelector('#create').childNodes[2];
+      const button = document.getElementById('create');
+      const iconSpan = button.querySelector('.material-symbols-rounded');
+      const textNode = button.childNodes[2];
 
       if (loading) {
         iconSpan.textContent = 'autorenew';
         iconSpan.style.animation = 'spin 3s ease-in-out infinite';
         textNode.nodeValue = ' Creating...';
+        button.disabled = true;
+        button.style.opacity = 0.8;
+        button.style.cursor = 'not-allowed';
       } else {
         iconSpan.textContent = 'rocket_launch';
         iconSpan.style.animation = '';
         textNode.nodeValue = ' Create Animation';
+        button.disabled = false;
+        button.style.opacity = '';
+        button.style.cursor = '';
       }
     }
   </script>

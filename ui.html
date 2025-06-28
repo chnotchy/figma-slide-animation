@@ -236,12 +236,20 @@
       <div class="option-label">Direction Priority</div>
       <div class="radio-group">
         <div class="radio-card selected" id="vertical-card" data-direction="vertical" onclick="selectCard(this)">
-          <span class="material-symbols-rounded">south</span>
+          <!-- <span class="material-symbols-rounded">south</span> -->
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+            <path
+              d="M480-97q-8 0-15-2.5t-13-8.5L228-332q-11-11-11-28t11-28q12-12 28.5-11.5T284-388l156 155v-607q0-17 11.5-28.5T480-880q17 0 28.5 11.5T520-840v607l155-155q12-12 28.5-12t28.5 12q11 12 11 28.5T732-332L508-108q-6 6-13 8.5T480-97Z" />
+          </svg>
           <label>Vertical</label>
           <span class="description">Top → Bottom, <br />then Left → Right</span>
         </div>
         <div class="radio-card" id="horizontal-card" data-direction="horizontal" onclick="selectCard(this)">
-          <span class="material-symbols-rounded">east</span>
+          <!-- <span class="material-symbols-rounded">east</span> -->
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+            <path
+              d="M727-440H120q-17 0-28.5-11.5T80-480q0-17 11.5-28.5T120-520h607L572-676q-11-11-11.5-27.5T572-732q11-11 28-11t28 11l224 224q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L628-228q-11 11-27.5 11T572-228q-12-12-12-28.5t12-28.5l155-155Z" />
+          </svg>
           <label>Horizontal</label>
           <span class="description">Left → Right, <br />then Top → Bottom</span>
         </div>
@@ -261,11 +269,21 @@
 
     <div class="button-group">
       <button class="button" id="cancel">
-        <span class="material-symbols-rounded">close</span>
+        <!-- <span class="material-symbols-rounded">close</span> -->
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+          <path
+            d="M480-424 284-228q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536-480l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480-424Z" />
+        </svg>
         Cancel
       </button>
       <button class="button primary" id="create">
-        <span class="material-symbols-rounded">rocket_launch</span>
+        <!-- <span class="material-symbols-rounded">rocket_launch</span> -->
+        <span class="icon-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+            <path
+              d="M284-506q14-28 29-54t33-52l-56-11-84 84 78 33Zm482-275q-70 2-149.5 41T472-636q-42 42-75 90t-49 90l114 113q42-16 90-49t90-75q65-65 104-144t41-149q0-4-1.5-8t-4.5-7q-3-3-7-4.5t-8-1.5ZM546-541q-23-23-23-56.5t23-56.5q23-23 57-23t57 23q23 23 23 56.5T660-541q-23 23-57 23t-57-23Zm-34 262 33 79 84-84-11-56q-26 18-52 32.5T512-279Zm351-534q8 110-36 214.5T688-399l20 99q4 20-2 39t-20 33L560-102q-15 15-36 11.5T495-114l-61-143-171-171-143-61q-20-8-24-29t11-36l126-126q14-14 33.5-20t39.5-2l99 20q95-95 199.5-139T819-857q8 1 16 4.5t14 9.5q6 6 9.5 14t4.5 16ZM157-321q35-35 85.5-35.5T328-322q35 35 34.5 85.5T327-151q-48 48-113.5 57T82-76q9-66 18-131.5T157-321Zm57 56q-17 17-23.5 41T180-175q25-4 49-10t41-23q12-12 13-29t-11-29q-12-12-29-11.5T214-265Z" />
+          </svg>
+        </span>
         <span class="progress-text">Create Animation</span>
       </button>
     </div>
@@ -332,19 +350,26 @@
 
     function setCreateButtonLoading(loading) {
       const button = document.getElementById('create');
-      const iconSpan = button.querySelector('.material-symbols-rounded');
+      // const iconSpan = button.querySelector('.material-symbols-rounded');
+      const iconSvg = button.querySelector('.icon-svg');
       const textSpan = button.querySelector('.progress-text');
 
       if (loading) {
-        iconSpan.textContent = 'autorenew';
-        iconSpan.style.animation = 'spin 1.6s ease-in-out infinite';
+        // iconSpan.textContent = 'autorenew';
+        // iconSpan.style.animation = 'spin 1.6s ease-in-out infinite';
+        const autorenewSvg = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-478q0 16 2 31.5t7 30.5q5 17-1 32.5T227-361q-16 8-31.5 1.5T175-383q-8-23-11.5-47t-3.5-48q0-134 93-228t227-94h7l-36-36q-11-11-11-28t11-28q11-11 28-11t28 11l104 104q12 12 12 28t-12 28L507-628q-11 11-28 11t-28-11q-11-11-11-28t11-28l36-36h-7q-100 0-170 70.5T240-478Zm480-4q0-16-2-31.5t-7-30.5q-5-17 1-32.5t21-22.5q16-8 31.5-1.5T785-577q8 23 11.5 47t3.5 48q0 134-93 228t-227 94h-7l36 36q11 11 11 28t-11 28q-11 11-28 11t-28-11L349-172q-12-12-12-28t12-28l104-104q11-11 28-11t28 11q11 11 11 28t-11 28l-36 36h7q100 0 170-70.5T720-482Z"/></svg>';
+        iconSvg.innerHTML = autorenewSvg;
+        iconSvg.style.animation = 'spin 1.6s ease-in-out infinite';
         textSpan.textContent = 'Creating...';
         button.disabled = true;
         button.style.opacity = 0.8;
         button.style.cursor = 'not-allowed';
       } else {
-        iconSpan.textContent = 'rocket_launch';
-        iconSpan.style.animation = '';
+        // iconSpan.textContent = 'rocket_launch';
+        // iconSpan.style.animation = '';
+        const rocketLaunchSvg = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M284-506q14-28 29-54t33-52l-56-11-84 84 78 33Zm482-275q-70 2-149.5 41T472-636q-42 42-75 90t-49 90l114 113q42-16 90-49t90-75q65-65 104-144t41-149q0-4-1.5-8t-4.5-7q-3-3-7-4.5t-8-1.5ZM546-541q-23-23-23-56.5t23-56.5q23-23 57-23t57 23q23 23 23 56.5T660-541q-23 23-57 23t-57-23Zm-34 262 33 79 84-84-11-56q-26 18-52 32.5T512-279Zm351-534q8 110-36 214.5T688-399l20 99q4 20-2 39t-20 33L560-102q-15 15-36 11.5T495-114l-61-143-171-171-143-61q-20-8-24-29t11-36l126-126q14-14 33.5-20t39.5-2l99 20q95-95 199.5-139T819-857q8 1 16 4.5t14 9.5q6 6 9.5 14t4.5 16ZM157-321q35-35 85.5-35.5T328-322q35 35 34.5 85.5T327-151q-48 48-113.5 57T82-76q9-66 18-131.5T157-321Zm57 56q-17 17-23.5 41T180-175q25-4 49-10t41-23q12-12 13-29t-11-29q-12-12-29-11.5T214-265Z"/></svg>';
+        iconSvg.innerHTML = rocketLaunchSvg;
+        iconSvg.style.animation = '';
         textSpan.textContent = 'Create Animation';
         button.disabled = false;
         button.style.opacity = '';

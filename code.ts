@@ -27,7 +27,6 @@ figma.showUI(__html__, { width: 400, height: 648 });
 
 figma.ui.on('message', async (msg) => {
   if (msg.type === 'create-animation') {
-    await clearAllTransitions(); // Clear all transitions before creating new ones
     await createSlideAnimation(msg.direction);
   } else if (msg.type === 'cancel') {
     figma.closePlugin();
@@ -35,11 +34,12 @@ figma.ui.on('message', async (msg) => {
 });
 
 async function createSlideAnimation(direction: 'horizontal' | 'vertical') {
-  const selection = figma.currentPage.selection;
-  
-  // Filter only frame nodes
-  const frames = selection.filter(node => node.type === 'FRAME') as FrameNode[];
-  
+  figma.ui.postMessage({ type: 'progress', percent: 0 });
+
+  const frames = figma.currentPage.selection.filter(
+    (node): node is FrameNode => node.type === 'FRAME'
+  );
+
   if (frames.length < 2) {
     figma.notify('Please select at least 2 frames to create slide animation.');
     return;
@@ -54,13 +54,14 @@ async function createSlideAnimation(direction: 'horizontal' | 'vertical') {
 
   // Sort frames based on direction priority
   const sortedFrames = sortFramesByDirection(framePositions, direction);
-  
+
+  // Clear existing transitions
+  await clearAllTransitions(frames);
   // Create transitions between consecutive frames
   await createTransitions(sortedFrames);
-  
+
   figma.notify(`Created slide animation for ${sortedFrames.length} frames!`);
   figma.ui.postMessage({ type: 'animation-complete' });
-
 }
 
 function sortFramesByDirection(framePositions: FramePosition[], direction: 'horizontal' | 'vertical'): FrameNode[] {
@@ -85,6 +86,9 @@ function sortFramesByDirection(framePositions: FramePosition[], direction: 'hori
 }
 
 async function createTransitions(frames: FrameNode[]) {
+  const total = (frames.length - 1) * 2;
+  let done = 0;
+
   for (let i = 0; i < frames.length - 1; i++) {
     const currentFrame = frames[i];
     const nextFrame = frames[i + 1];
@@ -151,6 +155,12 @@ async function createTransitions(frames: FrameNode[]) {
     ];
 
     await currentFrame.setReactionsAsync(reactions);
+
+    done++;
+    if (done % 5 === 0) {
+      await new Promise(resolve => setTimeout(resolve, 0));
+      figma.ui.postMessage({ type: 'progress', percent: Math.round((done / total) * 100) });
+    }
   }
 
   for (let i = frames.length - 1; i > 0; i--) {
@@ -197,15 +207,25 @@ async function createTransitions(frames: FrameNode[]) {
       }
     ];
 
-    currentFrame.setReactionsAsync([...(currentFrame.reactions || []), ...reverseReactions]);
+    await currentFrame.setReactionsAsync([
+      ...(currentFrame.reactions || []),
+      ...reverseReactions
+    ]);
+
+    done++;
+    if (done % 5 === 0) {
+      await new Promise(resolve => setTimeout(resolve, 0));
+      figma.ui.postMessage({ type: 'progress', percent: Math.round((done / total) * 100) });
+    }
   }
+
+  figma.ui.postMessage({ type: 'progress', percent: 100 });
 }
 
-async function clearAllTransitions() {
-  const frames = figma.currentPage.findAll(node => node.type === 'FRAME') as FrameNode[];
-  frames.forEach(async frame => {
-    await frame.setReactionsAsync([]); // Clear all existing reactions
-  });
+async function clearAllTransitions(targetFrames: FrameNode[]) {
+  await Promise.all(
+    targetFrames.map(frame => frame.setReactionsAsync([]))
+  );
 }
 
 // Handle plugin commands

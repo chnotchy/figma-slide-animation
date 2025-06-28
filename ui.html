@@ -265,7 +265,7 @@
       </button>
       <button class="button primary" id="create">
         <span class="material-symbols-rounded">rocket_launch</span>
-        Create Animation
+        <span class="progress-text">Create Animation</span>
       </button>
     </div>
   </div>
@@ -313,24 +313,34 @@
         isLoading = false;
         setCreateButtonLoading(false);
       }
+
+      if (pluginMessage?.type === 'progress') {
+        const percent = pluginMessage.percent;
+        updateProgress(percent);
+      }
     };
+
+    function updateProgress(percent) {
+      const textSpan = document.querySelector('#create .progress-text');
+      textSpan.textContent = `Creating... (${percent}%)`;
+    }
 
     function setCreateButtonLoading(loading) {
       const button = document.getElementById('create');
       const iconSpan = button.querySelector('.material-symbols-rounded');
-      const textNode = button.childNodes[2];
+      const textSpan = button.querySelector('.progress-text');
 
       if (loading) {
         iconSpan.textContent = 'autorenew';
         iconSpan.style.animation = 'spin 3s ease-in-out infinite';
-        textNode.nodeValue = ' Creating...';
+        textSpan.textContent = 'Creating... (0%)';
         button.disabled = true;
         button.style.opacity = 0.8;
         button.style.cursor = 'not-allowed';
       } else {
         iconSpan.textContent = 'rocket_launch';
         iconSpan.style.animation = '';
-        textNode.nodeValue = ' Create Animation';
+        textSpan.textContent = 'Create Animation';
         button.disabled = false;
         button.style.opacity = '';
         button.style.cursor = '';

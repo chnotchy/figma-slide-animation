@@ -42,6 +42,7 @@ async function createSlideAnimation(direction: 'horizontal' | 'vertical') {
 
   if (frames.length < 2) {
     figma.notify('Please select at least 2 frames to create slide animation.');
+    figma.ui.postMessage({ type: 'animation-complete' });
     return;
   }
 

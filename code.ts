@@ -23,7 +23,7 @@ const defaultSettings: AnimationSettings = {
 };
 
 // Show UI when plugin starts
-figma.showUI(__html__, { width: 400, height: 648 });
+figma.showUI(__html__, { width: 400, height: 672 });
 
 figma.ui.on('message', async (msg) => {
   if (msg.type === 'create-animation') {

@@ -34,11 +34,12 @@ figma.ui.on('message', async (msg) => {
 });
 
 async function createSlideAnimation(direction: 'horizontal' | 'vertical') {
-  figma.ui.postMessage({ type: 'progress', percent: 0 });
-
   const frames = figma.currentPage.selection.filter(
     (node): node is FrameNode => node.type === 'FRAME'
   );
+
+  const showPercent = frames.length >= 100;
+  figma.ui.postMessage({ type: 'progress', percent: 0, showPercent });
 
   if (frames.length < 2) {
     figma.notify('Please select at least 2 frames to create slide animation.');
@@ -59,7 +60,7 @@ async function createSlideAnimation(direction: 'horizontal' | 'vertical') {
   // Clear existing transitions
   await clearAllTransitions(frames);
   // Create transitions between consecutive frames
-  await createTransitions(sortedFrames);
+  await createTransitions(sortedFrames, showPercent);
 
   figma.notify(`Created slide animation for ${sortedFrames.length} frames!`);
   figma.ui.postMessage({ type: 'animation-complete' });
@@ -86,7 +87,7 @@ function sortFramesByDirection(framePositions: FramePosition[], direction: 'hori
   return sorted.map(fp => fp.frame);
 }
 
-async function createTransitions(frames: FrameNode[]) {
+async function createTransitions(frames: FrameNode[], showPercent: boolean) {
   const total = (frames.length - 1) * 2;
   let done = 0;
 
@@ -158,9 +159,9 @@ async function createTransitions(frames: FrameNode[]) {
     await currentFrame.setReactionsAsync(reactions);
 
     done++;
-    if (done % 5 === 0) {
+    if (done % 5 === 0 && showPercent) {
       await new Promise(resolve => setTimeout(resolve, 0));
-      figma.ui.postMessage({ type: 'progress', percent: Math.round((done / total) * 100) });
+      figma.ui.postMessage({ type: 'progress', percent: Math.round((done / total) * 100), showPercent });
     }
   }
 
@@ -214,13 +215,15 @@ async function createTransitions(frames: FrameNode[]) {
     ]);
 
     done++;
-    if (done % 5 === 0) {
+    if (done % 5 === 0 && showPercent) {
       await new Promise(resolve => setTimeout(resolve, 0));
-      figma.ui.postMessage({ type: 'progress', percent: Math.round((done / total) * 100) });
+      figma.ui.postMessage({ type: 'progress', percent: Math.round((done / total) * 100), showPercent });
     }
   }
 
-  figma.ui.postMessage({ type: 'progress', percent: 100 });
+  if (showPercent) {
+    figma.ui.postMessage({ type: 'progress', percent: 100, showPercent });
+  }
 }
 
 async function clearAllTransitions(targetFrames: FrameNode[]) {

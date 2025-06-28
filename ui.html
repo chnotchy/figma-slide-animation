@@ -316,14 +316,18 @@
       }
 
       if (pluginMessage?.type === 'progress') {
-        const percent = pluginMessage.percent;
-        updateProgress(percent);
+        const { percent, showPercent } = pluginMessage;
+        updateProgress(percent, showPercent);
       }
     };
 
-    function updateProgress(percent) {
+    function updateProgress(percent, showPercent) {
       const textSpan = document.querySelector('#create .progress-text');
-      textSpan.textContent = `Creating... (${percent}%)`;
+      if (showPercent) {
+        textSpan.textContent = `Creating... (${percent}%)`;
+      } else {
+        textSpan.textContent = 'Creating...';
+      }
     }
 
     function setCreateButtonLoading(loading) {
